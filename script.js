@@ -95,9 +95,7 @@ function inserirPokemon(pokemon) {
 function criarImagemPokemon(pokemon) {
     const imgPokemon = document.createElement('img');
     imgPokemon.src = pokemon.url_icon;
-    imgPokemon.onerror = function () {
-        icon.src = pokemon.url_icon_2;
-    }
+
 
     return imgPokemon;
 }
