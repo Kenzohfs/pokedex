@@ -62,16 +62,14 @@ function criarTabela() {
     tabela.style.marginTop = '20px'
     main.appendChild(tabela);
 
-    pokemonList();
+    pokemonList()
 }
 
 function pokemonList() {
     fetch('https://prof-poke-api.herokuapp.com/api/pokedex/').then(function (resultado) {
         resultado.json().then(function (data) {
             console.log('data: ', data);
-            data.forEach(function (e) {
-                inserirPokemon(e);
-            })
+            inserirPokemon(data);
         });
     }).catch(function (erro) {
         console.log('Erro: ', erro);
@@ -79,17 +77,35 @@ function pokemonList() {
 }
 
 function inserirPokemon(pokemon) {
-    const tabela = document.querySelector('table');
-    const linha = document.createElement('tr');
-    const colunaImagem = document.createElement('td');
-    const colunaNome = document.createElement('td');
+    pokemon.forEach(function (e) {
+        const tabela = document.querySelector('table');
+        const linha = document.createElement('tr');
+        const colunaImagem = document.createElement('td');
+        const colunaNome = document.createElement('td');
+        const colunaBotao = document.createElement('td');
+        
+        colunaImagem.appendChild(criarImagemPokemon(e));
+        colunaNome.innerText = e.name;
+        colunaBotao.appendChild(botaoRedirecionamento(e))
+    
+        tabela.appendChild(linha);
+        linha.appendChild(colunaImagem);
+        linha.appendChild(colunaNome);
+        linha.appendChild(colunaBotao);
+    })
+}
 
-    colunaImagem.appendChild(criarImagemPokemon(pokemon));
-    colunaNome.innerText = pokemon.name;
+function botaoRedirecionamento(pokemon) {
+    const button = document.createElement('button');
+    const link = document.createElement('a');
 
-    tabela.appendChild(linha);
-    linha.appendChild(colunaImagem);
-    linha.appendChild(colunaNome);
+    link.innerText = 'Link';
+    link.target = '_blank';
+    link.href = './pokemonPage/index.html?' + pokemon.id;
+
+    button.appendChild(link);
+
+    return button;
 }
 
 function criarImagemPokemon(pokemon) {
