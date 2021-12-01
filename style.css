@@ -14,5 +14,8 @@ main {
 }
 
 table, tr, td {
-    
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 6px 9px;
+    text-align: center;
 }
