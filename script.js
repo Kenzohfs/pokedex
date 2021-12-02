@@ -119,7 +119,6 @@ function criarImagemPokemon(pokemon) {
         imgPokemon.src = pokemon.url_icon_2;
     }
 
-
     return imgPokemon;
 }
 
@@ -133,7 +132,7 @@ function getInputValue() {
 
 function filterTable(input) {
     const listaFiltrada = listaDePokemon.filter(function (e) {
-        return e.name.startsWith(input)
+        return e.name.toLowerCase().startsWith(input.toLowerCase());
     });
 
     criarTabela(listaFiltrada);

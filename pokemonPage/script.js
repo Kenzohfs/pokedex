@@ -23,14 +23,13 @@ function fotoPokemon() {
     fetch('https://prof-poke-api.herokuapp.com/api/pokemon/' + idPokemon).then(function (resultado) {
         resultado.json().then(function (data) {
             console.log('data: ', data);
-            const nome = data.name;
-            const fotourl = data.url_icon;
 
             const atk = data.atk;
             const atks = data.atks;
             const def = data.def;
             const defs = data.defs;
-            colocarItens(nome, fotourl);
+            
+            colocarItens(data.name, data);
             colocarRegistrosTabela(atk, atks, def, defs, criarTabela());
         });
     }).catch(function (erro) {
@@ -40,11 +39,16 @@ function fotoPokemon() {
 
 function colocarItens(nome, foto) {
     const nomePokemon = document.createElement('h1');
-    const fotoPokemon = document.createElement('img');
+    let fotoPokemon = document.createElement('img');
     const main = document.querySelector('main')
 
     nomePokemon.innerText = nome;
-    fotoPokemon.src = foto;
+    fotoPokemon.src = foto.url_icon;
+
+    fotoPokemon.onerror = function () {
+        fotoPokemon.src = foto.url_icon_2;
+    }
+
     fotoPokemon.style.height = '20vh'
 
 
