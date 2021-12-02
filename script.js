@@ -1,5 +1,15 @@
-//https://prof-poke-api.herokuapp.com/api/pokedex/
-//https://prof-poke-api.herokuapp.com/api/pokemon/001/
+let listaDePokemon = [];
+
+fetch('https://prof-poke-api.herokuapp.com/api/pokedex/').then(function (resultado) {
+    resultado.json().then(function (data) {
+        console.log('data: ', data);
+        data.forEach(function (e) {
+            listaDePokemon.push(e);
+        });
+    });
+}).catch(function (erro) {
+    console.log('Erro: ', erro);
+});
 
 function criarLogo() {
     const header = document.createElement('header');
@@ -47,10 +57,10 @@ function criarBotaoFilter(div) {
 
     botaoFilter.onclick = getInputValue;
 
-    criarTabela();
+    criarTabela(listaDePokemon);
 }
 
-function criarTabela() {
+function criarTabela(listaParameter) {
     let tabelaAtual = document.querySelector('table');
     const main = document.querySelector('main');
 
@@ -59,35 +69,25 @@ function criarTabela() {
     }
 
     const tabela = document.createElement('table');
-    tabela.style.marginTop = '20px'
+    tabela.style.marginTop = '20px';
     main.appendChild(tabela);
 
-    pokemonList()
+    inserirPokemon(listaParameter);
 }
 
-function pokemonList() {
-    fetch('https://prof-poke-api.herokuapp.com/api/pokedex/').then(function (resultado) {
-        resultado.json().then(function (data) {
-            console.log('data: ', data);
-            inserirPokemon(data);
-        });
-    }).catch(function (erro) {
-        console.log('Erro: ', erro);
-    });
-}
+function inserirPokemon(listaParameter) {
+    const tabela = document.querySelector('table');
 
-function inserirPokemon(pokemon) {
-    pokemon.forEach(function (e) {
-        const tabela = document.querySelector('table');
+    listaParameter.forEach(function (e) {
         const linha = document.createElement('tr');
         const colunaImagem = document.createElement('td');
         const colunaNome = document.createElement('td');
         const colunaBotao = document.createElement('td');
-        
+
         colunaImagem.appendChild(criarImagemPokemon(e));
         colunaNome.innerText = e.name;
         colunaBotao.appendChild(botaoRedirecionamento(e))
-    
+
         tabela.appendChild(linha);
         linha.appendChild(colunaImagem);
         linha.appendChild(colunaNome);
@@ -112,7 +112,6 @@ function criarImagemPokemon(pokemon) {
     const imgPokemon = document.createElement('img');
     imgPokemon.src = pokemon.url_icon;
 
-
     return imgPokemon;
 }
 
@@ -125,15 +124,11 @@ function getInputValue() {
 }
 
 function filterTable(input) {
-    fetch('https://prof-poke-api.herokuapp.com/api/pokedex/').then(function (resultado) {
-        resultado.json().then(function (data) {
-            const listaFiltrada = data.filter(function (e) {
-                return e.name.startwith(input)
-            });
-        });
-    }).catch(function (erro) {
-        console.log('Erro: ', erro);
+    const listaFiltrada = data.filter(function (e) {
+        return e.name.startsWith(input)
     });
+
+    criarTabela(listaFiltrada);
 }
 
 criarLogo();
