@@ -2,7 +2,6 @@ let listaDePokemon = [];
 
 fetch('https://prof-poke-api.herokuapp.com/api/pokedex/').then(function (resultado) {
     resultado.json().then(function (data) {
-        console.log('data: ', data);
         data.forEach(function (e) {
             listaDePokemon.push(e);
         });

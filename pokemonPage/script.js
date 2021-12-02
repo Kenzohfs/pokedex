@@ -22,7 +22,6 @@ function criarLogo() {
 function fotoPokemon() {
     fetch('https://prof-poke-api.herokuapp.com/api/pokemon/' + idPokemon).then(function (resultado) {
         resultado.json().then(function (data) {
-            console.log('data: ', data);
 
             const atk = data.atk;
             const atks = data.atks;
@@ -50,7 +49,6 @@ function colocarItens(nome, foto) {
     }
 
     fotoPokemon.style.height = '20vh'
-
 
     main.appendChild(nomePokemon);
     main.appendChild(fotoPokemon);
