@@ -6,6 +6,8 @@ fetch('https://prof-poke-api.herokuapp.com/api/pokedex/').then(function (resulta
         data.forEach(function (e) {
             listaDePokemon.push(e);
         });
+        criarDivFilter();
+        criarTabela(listaDePokemon);
     });
 }).catch(function (erro) {
     console.log('Erro: ', erro);
@@ -56,8 +58,6 @@ function criarBotaoFilter(div) {
     div.appendChild(botaoFilter);
 
     botaoFilter.onclick = getInputValue;
-
-    criarTabela(listaDePokemon);
 }
 
 function criarTabela(listaParameter) {
@@ -124,7 +124,7 @@ function getInputValue() {
 }
 
 function filterTable(input) {
-    const listaFiltrada = data.filter(function (e) {
+    const listaFiltrada = listaDePokemon.filter(function (e) {
         return e.name.startsWith(input)
     });
 
@@ -132,4 +132,3 @@ function filterTable(input) {
 }
 
 criarLogo();
-criarDivFilter();
