@@ -31,7 +31,7 @@ function fotoPokemon() {
             const def = data.def;
             const defs = data.defs;
             colocarItens(nome, fotourl);
-            criarTabela(atk, atks, def, defs);
+            colocarRegistrosTabela(atk, atks, def, defs, criarTabela());
         });
     }).catch(function (erro) {
         console.log('Erro: ', erro);
@@ -39,49 +39,63 @@ function fotoPokemon() {
 }
 
 function colocarItens(nome, foto) {
-    const nomePokemon = document.createElement('h3');
+    const nomePokemon = document.createElement('h1');
     const fotoPokemon = document.createElement('img');
     const main = document.querySelector('main')
 
     nomePokemon.innerText = nome;
     fotoPokemon.src = foto;
+    fotoPokemon.style.height = '20vh'
+
 
     main.appendChild(nomePokemon);
     main.appendChild(fotoPokemon);
 }
 
-function criarTabela(atk, atks, def, defs) {
+function criarTabela() {
     const tabela = document.createElement('table');
-    const linha = document.createElement('tr');
-    const linhaS = document.createElement('tr');
-    const colunaATK = document.createElement('td');
-    const colunaATKS = document.createElement('td');
-    const colunaDEF = document.createElement('td');
-    const colunaDEFS = document.createElement('td');
 
     const header = document.createElement('tr');
     const headerATK = document.createElement('th');
     const headerDEF = document.createElement('th');
+    const headerDEFS = document.createElement('th');
+    const headerATKS = document.createElement('th');
 
-    headerATK.innerText = 'ATK'
-    headerDEF.innerText = 'DEF'
+    headerDEFS.innerText = 'DEFS';
+    headerATKS.innerText = 'ATKS';
+    headerATK.innerText = 'ATK';
+    headerDEF.innerText = 'DEF';
 
     header.appendChild(headerATK);
+    header.appendChild(headerATKS);
     header.appendChild(headerDEF);
+    header.appendChild(headerDEFS);
+
+    main.appendChild(tabela);
+    tabela.appendChild(header);
+
+    tabela.style.marginTop = '20px';
+
+    return tabela;
+}
+
+function colocarRegistrosTabela(atk, atks, def, defs, tabela) {
+    const linha = document.createElement('tr');
+    const colunaATK = document.createElement('td');
+    const colunaATKS = document.createElement('td');
+    const colunaDEF = document.createElement('td');
+    const colunaDEFS = document.createElement('td');
 
     colunaATK.innerText = atk;
     colunaATKS.innerText = atks;
     colunaDEF.innerText = def;
     colunaDEFS.innerText = defs;
 
-    main.appendChild(tabela);
-    tabela.append(header);
     tabela.appendChild(linha);
-    tabela.appendChild(linhaS);
     linha.appendChild(colunaATK);
-    linhaS.appendChild(colunaATKS);
+    linha.appendChild(colunaATKS);
     linha.appendChild(colunaDEF);
-    linhaS.appendChild(colunaDEFS);
+    linha.appendChild(colunaDEFS);
 }
 
 criarLogo();
