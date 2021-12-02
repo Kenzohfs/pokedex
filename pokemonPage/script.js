@@ -1,6 +1,8 @@
 const idPokemon = document.location.search.replace('?', '');
+
 const header = document.createElement('header');
 document.body.appendChild(header);
+
 const main = document.createElement('main');
 document.body.appendChild(main);
 

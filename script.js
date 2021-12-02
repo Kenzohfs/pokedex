@@ -99,6 +99,8 @@ function botaoRedirecionamento(pokemon) {
     const button = document.createElement('button');
     const link = document.createElement('a');
 
+    link.id = 'link';
+
     link.innerText = 'Link';
     link.target = '_blank';
     link.href = './pokemonPage/index.html?' + pokemon.id;

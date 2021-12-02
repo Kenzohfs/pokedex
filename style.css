@@ -19,3 +19,8 @@ table, tr, td {
     padding: 6px 9px;
     text-align: center;
 }
+
+#link {
+    text-decoration: none;
+    color: blue;
+}
