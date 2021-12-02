@@ -45,6 +45,7 @@ function criarInput(div) {
     div.appendChild(inputFilter);
 
     criarBotaoFilter(div);
+    criarBotaoClean(div);
 }
 
 function criarBotaoFilter(div) {
@@ -57,6 +58,18 @@ function criarBotaoFilter(div) {
     div.appendChild(botaoFilter);
 
     botaoFilter.onclick = getInputValue;
+}
+
+function criarBotaoClean(div) {
+    const botaoClean = document.createElement('button');
+
+    botaoClean.id = 'botaoClean';
+    botaoClean.innerText = 'Limpar';
+    botaoClean.style.marginLeft = '10px'
+
+    div.appendChild(botaoClean);
+
+    botaoClean.onclick = cleanInput;
 }
 
 function criarTabela(listaParameter) {
@@ -127,6 +140,14 @@ function getInputValue() {
     const inputValue = inputFilter.value;
 
     filterTable(inputValue);
+}
+
+function cleanInput() {
+    const inputFilter = document.querySelector('#inputFilter');
+
+    inputFilter.value = '';
+
+    criarTabela(listaDePokemon);
 }
 
 function filterTable(input) {
