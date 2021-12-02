@@ -24,3 +24,7 @@ table, tr, td {
     text-decoration: none;
     color: blue;
 }
+
+#imgPokemon {
+    width: 100px;
+}

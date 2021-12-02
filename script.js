@@ -113,6 +113,12 @@ function botaoRedirecionamento(pokemon) {
 function criarImagemPokemon(pokemon) {
     const imgPokemon = document.createElement('img');
     imgPokemon.src = pokemon.url_icon;
+    imgPokemon.id = 'imgPokemon';
+
+    imgPokemon.onerror = function () {
+        imgPokemon.src = pokemon.url_icon_2;
+    }
+
 
     return imgPokemon;
 }
