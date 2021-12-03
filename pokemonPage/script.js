@@ -19,7 +19,7 @@ function criarLogo() {
     header.appendChild(pokemonLogo);
 }
 
-function fotoPokemon() {
+function fetchPokemon() {
     fetch('https://prof-poke-api.herokuapp.com/api/pokemon/' + idPokemon).then(function (resultado) {
         resultado.json().then(function (data) {
 
@@ -101,4 +101,4 @@ function colocarRegistrosTabela(atk, atks, def, defs, tabela) {
 }
 
 criarLogo();
-fotoPokemon();
+fetchPokemon();
